@@ -37,3 +37,11 @@ const http = require("http");
 
 ///////////////////////////////////////////
 ///////////// HTTP
+
+const server = http.createServer((req, res) => {
+  res.end("Hello this from the server! ");
+});
+
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listning on server on 80000");
+});
