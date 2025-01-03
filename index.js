@@ -45,8 +45,9 @@ const server = http.createServer((req, res) => {
     res.end("This is OVERVIEW page");
   } else if (pathName === "/product") {
     res.end("This is Product page");
+  } else {
+    res.end("This page is not found!");
   }
-  res.end("Hello this from the server! ");
 });
 
 server.listen(8000, "127.0.0.1", () => {
