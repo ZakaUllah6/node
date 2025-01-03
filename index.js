@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
   } else if (pathName === "/product") {
     res.end("This is Product page");
   } else {
-    req.writeHead(404, {
+    res.writeHead(404, {
       "Content-type": "text/html",
       "my-own-header": "Hello World",
     });
