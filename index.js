@@ -38,7 +38,18 @@ const url = require("url");
 
 ///////////////////////////////////////////
 ///////////// Server
-
+const templateOverview = fs.readFileSync(
+  `${__dirname}/templates/template-overview.html`,
+  "utf-8"
+);
+const templateCard = fs.readFileSync(
+  `${__dirname}/templates/template-card.html`,
+  "utf-8"
+);
+const templateProducr = fs.readFileSync(
+  `${__dirname}/templates/template-prodcut.html`,
+  "utf-8"
+);
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObj = JSON.parse(data);
 
