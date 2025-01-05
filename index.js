@@ -4,8 +4,6 @@ const url = require("url");
 ///////////////////////////////////////////
 ///////////// FILE
 
-const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
-const dataObj = JSON.parse(data);
 // //Blocking, synchronous way
 // // const textin = fs.readFileSync("./txt/input.txt", "utf-8");
 
@@ -39,7 +37,10 @@ const dataObj = JSON.parse(data);
 // // });
 
 ///////////////////////////////////////////
-///////////// HTTP
+///////////// Server
+
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
+const dataObj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
   const pathName = req.url;
