@@ -58,6 +58,7 @@ const server = http.createServer((req, res) => {
 
   //Overview Page
   if (pathName === "/" || pathName === "/overview") {
+    fs.writeHead(200, { "Content-type": "text/html" });
     res.end("This is OVERVIEW page");
   }
 
