@@ -38,16 +38,16 @@ const url = require("url");
 
 ///////////////////////////////////////////
 ///////////// Server
-const templateOverview = fs.readFileSync(
+const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
   "utf-8"
 );
-const templateCard = fs.readFileSync(
+const tempCard = fs.readFileSync(
   `${__dirname}/templates/template-card.html`,
   "utf-8"
 );
-const templateProducr = fs.readFileSync(
-  `${__dirname}/templates/template-prodcut.html`,
+const tempProduct = fs.readFileSync(
+  `${__dirname}/templates/template-product.html`,
   "utf-8"
 );
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
@@ -58,8 +58,8 @@ const server = http.createServer((req, res) => {
 
   //Overview Page
   if (pathName === "/" || pathName === "/overview") {
-    fs.writeHead(200, { "Content-type": "text/html" });
-    res.end("This is OVERVIEW page");
+    res.writeHead(200, { "Content-type": "text/html" });
+    res.end(tempOverview);
   }
 
   //Product Page
