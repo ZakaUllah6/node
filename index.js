@@ -40,18 +40,18 @@ const url = require("url");
 ///////////// Server
 const replaceTemplate = (temp, product) => {
   let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
-  output = temp.replace(/{%FROM%}/g, product.from);
-  output = temp.replace(/{%NUTRIENTS%}/g, product.netrients);
-  output = temp.replace(/{%QUANTITY%}/g, product.quantity);
-  output = temp.replace(/{%NUTRIENTS%}/g, product.netrients);
-  output = temp.replace(/{%PRICE%}/g, product.price);
-  output = temp.replace(/{%IMAGE%}/g, product.image);
-  output = temp.replace(/{%description%}/g, product.description);
-  output = temp.replace(/{%ID%}/g, product.id);
+  output = output.replace(/{%FROM%}/g, product.from);
+  output = output.replace(/{%NUTRIENTS%}/g, product.netrients);
+  output = output.replace(/{%QUANTITY%}/g, product.quantity);
+  output = output.replace(/{%NUTRIENTS%}/g, product.netrients);
+  output = output.replace(/{%PRICE%}/g, product.price);
+  output = output.replace(/{%IMAGE%}/g, product.image);
+  output = output.replace(/{%description%}/g, product.description);
+  output = output.replace(/{%ID%}/g, product.id);
 
-  if (!product.organic === "NOT__ORGANIC") {
-    output = temp.replace(/{%NOT__ORGANIC%}/g, "not_organic");
-  }
+  if (!product.organic)
+    output = output.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+
   return output;
 };
 
@@ -76,9 +76,11 @@ const server = http.createServer((req, res) => {
   //Overview Page
   if (pathName === "/" || pathName === "/overview") {
     res.writeHead(200, { "Content-type": "text/html" });
-    const cardsHTMl = dataObj.map((el) => replaceTemplate(tempCard, el));
-    console.log(cardsHTMl);
-    res.end(tempOverview);
+    const cardsHTMl = dataObj
+      .map((el) => replaceTemplate(tempCard, el))
+      .join("");
+    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHTMl);
+    res.end(output);
   }
 
   //Product Page
