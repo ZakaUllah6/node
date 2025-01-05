@@ -38,6 +38,23 @@ const url = require("url");
 
 ///////////////////////////////////////////
 ///////////// Server
+const replaceTemplate = (temp, product) => {
+  let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
+  output = temp.replace(/{%FROM%}/g, product.from);
+  output = temp.replace(/{%NUTRIENTS%}/g, product.netrients);
+  output = temp.replace(/{%QUANTITY%}/g, product.quantity);
+  output = temp.replace(/{%NUTRIENTS%}/g, product.netrients);
+  output = temp.replace(/{%PRICE%}/g, product.price);
+  output = temp.replace(/{%IMAGE%}/g, product.image);
+  output = temp.replace(/{%description%}/g, product.description);
+  output = temp.replace(/{%ID%}/g, product.id);
+
+  if (!product.organic === "NOT__ORGANIC") {
+    output = temp.replace(/{%NOT__ORGANIC%}/g, "not_organic");
+  }
+  return output;
+};
+
 const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
   "utf-8"
@@ -59,6 +76,8 @@ const server = http.createServer((req, res) => {
   //Overview Page
   if (pathName === "/" || pathName === "/overview") {
     res.writeHead(200, { "Content-type": "text/html" });
+    const cardsHTMl = dataObj.map((el) => replaceTemplate(tempCard, el));
+    console.log(cardsHTMl);
     res.end(tempOverview);
   }
 
@@ -86,5 +105,3 @@ const server = http.createServer((req, res) => {
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listning on server on 80000");
 });
-
-// console.log("Hello");
