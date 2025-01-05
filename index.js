@@ -45,14 +45,24 @@ const dataObj = JSON.parse(data);
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
+  //Overview Page
   if (pathName === "/" || pathName === "/overview") {
     res.end("This is OVERVIEW page");
-  } else if (pathName === "/product") {
+  }
+
+  //Product Page
+  else if (pathName === "/product") {
     res.end("This is Product page");
-  } else if (pathName === "/api") {
+  }
+
+  //API Page
+  else if (pathName === "/api") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(data);
-  } else {
+  }
+
+  //Not Found Page!
+  else {
     res.writeHead(404, {
       "Content-type": "text/html",
       "my-own-header": "Hello World",
